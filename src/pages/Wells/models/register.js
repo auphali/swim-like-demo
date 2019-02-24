@@ -1,22 +1,32 @@
-import {getFakeWellList,getFakeHandOvers} from '@/services/api'
+import {getFakeWellList,getFakeHandOvers,getFakeAssets,getFakeFields} from '@/services/api'
+
 export default {
     namespace: 'wellregister',
     state: {
+        assets:[],
+        fields:[],
         wellHeader:[],
         selectedWell:null,
         handOverRecords:[]
     },
     effects:{
-        *fetchHeaders(_,{call,put}) {
+        *fetchAssets(_,{put}) {
+            const response = yield getFakeAssets()
+            yield put({type:'saveAssets',payload:response.data})
+        },
+        *fetchFields(_,{put}) {
+            const response = yield getFakeFields()
+            yield put({type:'saveFields',payload:response.data})
+        },
+        *fetchHeaders(_,{put}) {
             const response = yield getFakeWellList()
-            console.log(response)
             yield put({type:'saveHeaders',payload: response.data})
         },
-        *selectWell({payload},{call,put}) {
+        *selectWell({payload},{put}) {
             yield put({type:'setWell',payload})
             yield put({type:'getHandOver',payload})
         },
-        *getHandOver({payload},{call,put}) {
+        *getHandOver(_,{put}) {
             const response = yield getFakeHandOvers()
             yield put({
                 type:'saveHandOver',
@@ -25,13 +35,25 @@ export default {
         }
     },
     reducers:{
-        saveHeaders(state,{type,payload}) {
+        saveAssets(state,{payload}) {
+            return {
+                ...state,
+                assets:payload
+            }
+        },
+        saveFields(state,{payload}) {
+            return {
+                ...state,
+                fields:payload
+            }
+        },
+        saveHeaders(state,{payload}) {
             return {
                 ...state,
                 wellHeader:payload
             }
         },
-        setWell(state,{type,payload}) {
+        setWell(state,{payload}) {
             return {
                 ...state,
                 selectedWell: payload

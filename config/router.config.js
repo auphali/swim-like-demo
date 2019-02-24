@@ -23,47 +23,64 @@ export default [
         path:'/wells',
         name:'Wells',
         icon:'table',
-        component:'./Wells/WellRegisters'
-      },
-      {
-        path:'/wells/intervention',
-        name:'Well Intervention',
-        icon:'project',
         routes:[
           {
-            path:'/wells/intervention',
-            redirect:'/wells/intervention/requests',
-          },
-          {
-            path:'/wells/intervention/requests',
-            name:'Requests',
-            component:'./Wells/WellIntervention'
-          },
-          {
-            path:'/wells/intervention/activities',
-            name:'Activities',
-            component:'./Wells/WellIntervention'
-          },
-          {
-            path:'/wells/intervention/hsse',
-            name:'HSSE',
-            component:'./Wells/WellIntervention'
+            path:'/wells',
+            redirect:'/wells/registers'
+          },{
+            path:'/wells/assets',
+            name:'List of Assets',
+            component:'./Wells/AssetList'
+          },{
+            path:'/wells/fields',
+            name:'List of Fields',
+            component:'./Wells/FieldList'
+          },{
+            path:'/wells/registers',
+            name:'List of Wells',
+            component:'./Wells/WellRegisters'
           }
         ]
       },
       {
-        path:'/wells/integrity',
+        path:'/wli',
+        name:'Well Intervention',
+        icon:'project',
+        routes:[
+          {
+            path:'/wli',
+            redirect:'/wli/job-requests',
+          },
+          {
+            path:'/wli/job-requests',
+            name:'Requests',
+            component:'./WLI/Jobs'
+          },
+          {
+            path:'/wli/activities',
+            name:'Activities',
+            component:'./WLI/Jobs'
+          },
+          {
+            path:'/wli/hsse',
+            name:'HSSE',
+            component:'./WLI/Jobs'
+          }
+        ]
+      },
+      {
+        path:'/well-integrity',
         name:'Integrity',
         icon:'schedule',
         routes:[
           {
-            path:'/wells/integrity',
-            redirect:'/wells/integrity/status'
+            path:'/well-integrity',
+            redirect:'/well-integrity/data-capture'
           },
           {
-            path:'/wells/integrity/data-capture',
+            path:'/well-integrity/data-capture',
             name:'Data Capture',
-            component:'./Wells/WellRegisters'}
+            component:'./WellIntegrity/DataCapture'}
         ]
       },{
         path:'/wells/production',

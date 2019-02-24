@@ -132,3 +132,25 @@ export async function getFakeWellList() {
 export async function getFakeHandOvers() {
   return request('/api/wells/handovers')
 }
+
+export async function getFakeAssets() {
+  return request('/api/assets')
+}
+
+export async function getFakeFields() {
+  return request('/api/fields')
+}
+
+export async function addFakeAsset(asset) {
+  return request('/api/assets',{
+    method:'POST',
+    body:asset
+  })
+}
+
+export async function addFakeField(field) {
+  return request('/api/fields',{
+    method:'POST',
+    body:field
+  })
+}
